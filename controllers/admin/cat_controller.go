@@ -1,4 +1,4 @@
-package controllers
+package admin
 
 import (
 	"fmt"
@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AreaList(c *gin.Context) {
+func CatList(c *gin.Context) {
 	fmt.Println("hello")
 	c.JSONP(http.StatusOK, gin.H{
 		"message": "ok",
-		"data":    "エリア！",
+		"catData": "nyaa",
 	})
 }
