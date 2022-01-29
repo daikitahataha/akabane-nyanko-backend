@@ -29,7 +29,8 @@ func GetRouter() *gin.Engine {
 
 			tagEngine := adminEngine.Group("/tag")
 			{
-				tagEngine.GET("/list", admin.TagList)
+				var controller admin.CatTagController
+				tagEngine.GET("/list", controller.TagList)
 			}
 		}
 	}
