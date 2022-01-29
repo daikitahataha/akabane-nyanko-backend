@@ -1,15 +1,19 @@
-package cat_tag
+package cat_tag_repository
 
 import (
 	"akabane_nyanko/backend/src/db"
 	"akabane_nyanko/backend/src/models"
 )
 
-type CatTagRepository struct{}
-
 type CatTag models.CatTag
 
-func (ctr CatTagRepository) GetByLimitAndOffset(offset int, limit int) ([]CatTag, error) {
+type CatTagRepository struct{}
+
+func NewCatTagRepository() CatTagRepositoryInterface {
+	return &CatTagRepository{}
+}
+
+func (ctr *CatTagRepository) GetByLimitAndOffset(offset int, limit int) ([]CatTag, error) {
 	db := db.GetDB()
 	var catTags []CatTag
 

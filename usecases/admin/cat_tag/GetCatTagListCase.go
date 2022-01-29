@@ -1,15 +1,22 @@
 package cat_tag
 
 import (
-	"akabane_nyanko/backend/src/repositories/admin/cat_tag"
+	"akabane_nyanko/backend/src/repositories/admin/cat_tag_repository"
 	"log"
 )
 
 type GetCatTagListCase struct {
-	ctr cat_tag.CatTagRepository
+	ctr cat_tag_repository.CatTagRepositoryInterface
 }
 
-type CatTags = cat_tag.CatTag
+type CatTags = cat_tag_repository.CatTag
+
+func New() *GetCatTagListCase {
+	catTagRepositoryBind := cat_tag_repository.GetBind()
+	return &GetCatTagListCase{
+		ctr: catTagRepositoryBind.Ctr,
+	}
+}
 
 func (usecase GetCatTagListCase) Invoke(offset int, page int) ([]CatTags, error) {
 	limit := page * 10

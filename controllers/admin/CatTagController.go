@@ -3,7 +3,7 @@ package admin
 import (
 	"net/http"
 
-	"akabane_nyanko/backend/src/usecases/admin/cat_tag"
+	CatTagCase "akabane_nyanko/backend/src/usecases/admin/cat_tag"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,7 +11,7 @@ import (
 type CatTagController struct{}
 
 func (ctc CatTagController) TagList(c *gin.Context) {
-	var usecase cat_tag.GetCatTagListCase
+	usecase := CatTagCase.New()
 	catTags, err := usecase.Invoke(0, 1)
 	if err != nil {
 		c.JSONP(http.StatusInternalServerError, gin.H{
