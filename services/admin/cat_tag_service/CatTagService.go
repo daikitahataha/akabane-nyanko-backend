@@ -11,17 +11,13 @@ type CatTagService struct {
 
 type CatTag = cat_tag_repository.CatTag
 
-func New() *CatTagService {
-	catTagRepositoryBind := cat_tag_repository.GetBind()
-	return &CatTagService{
-		ctr: catTagRepositoryBind.Ctr,
-	}
+func New(ctr cat_tag_repository.CatTagRepositoryInterface) *CatTagService {
+	return &CatTagService{ctr}
 }
 
-func (s CatTagService) GetByPaginate(page interface{}) ([]CatTag, error) {
-	p := page.(int)
-	offset := p - 1
-	limit := p * 10
+func (s CatTagService) GetByPaginate(page int) ([]CatTag, error) {
+	offset := page - 1
+	limit := page * 10
 
 	catTags, err := s.ctr.GetByLimitAndOffset(offset, limit)
 	if err != nil {

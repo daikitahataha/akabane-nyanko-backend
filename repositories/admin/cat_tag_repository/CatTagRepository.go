@@ -7,6 +7,10 @@ import (
 
 type CatTag models.CatTag
 
+type CatTagRepositoryInterface interface {
+	GetByLimitAndOffset(offset int, limit int) ([]CatTag, error)
+}
+
 type CatTagRepository struct{}
 
 func NewCatTagRepository() CatTagRepositoryInterface {

@@ -1,6 +1,7 @@
 package cat_tag
 
 import (
+	"akabane_nyanko/backend/src/repositories/admin/cat_tag_repository"
 	cts "akabane_nyanko/backend/src/services/admin/cat_tag_service"
 	"log"
 	"strconv"
@@ -15,7 +16,8 @@ type GetCatTagListCase struct {
 type CatTags = cts.CatTag
 
 func New() *GetCatTagListCase {
-	catTagService := cts.New()
+	ctr := cat_tag_repository.NewCatTagRepository()
+	catTagService := cts.New(ctr)
 	return &GetCatTagListCase{
 		cts: catTagService,
 	}
