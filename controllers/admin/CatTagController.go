@@ -23,6 +23,6 @@ func (ctc CatTagController) TagList(c *gin.Context) {
 
 	c.JSONP(http.StatusOK, gin.H{
 		"message": "ok",
-		"data":    catTags,
+		"list":    catTags,
 	})
 }
