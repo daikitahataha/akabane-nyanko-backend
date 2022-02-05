@@ -23,15 +23,15 @@ func New() *GetCatTagListCase {
 	}
 }
 
-func (usecase GetCatTagListCase) Invoke(c *gin.Context) ([]CatTags, error) {
+func (usecase GetCatTagListCase) Invoke(c *gin.Context) ([]CatTags, int, error) {
 	page := c.Query("page")
 	var p int
 	p, _ = strconv.Atoi(page)
 
-	catTags, err := usecase.cts.GetByPaginate(p)
+	catTags, totalPage, err := usecase.cts.GetAsPaginate(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	return catTags, err
+	return catTags, totalPage, err
 }

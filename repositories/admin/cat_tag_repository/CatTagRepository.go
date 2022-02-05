@@ -9,6 +9,7 @@ type CatTag models.CatTag
 
 type CatTagRepositoryInterface interface {
 	GetByLimitAndOffset(offset int, limit int) ([]CatTag, error)
+	GetRecordCount() int
 }
 
 type CatTagRepository struct{}
@@ -26,4 +27,13 @@ func (ctr *CatTagRepository) GetByLimitAndOffset(offset int, limit int) ([]CatTa
 	}
 
 	return catTags, nil
+}
+
+func (ctr *CatTagRepository) GetRecordCount() int {
+	db := db.GetDB()
+	var count int
+
+	db.Model(&CatTag{}).Count(&count)
+
+	return count
 }

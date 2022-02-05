@@ -12,7 +12,7 @@ type CatTagController struct{}
 
 func (ctc CatTagController) TagList(c *gin.Context) {
 	usecase := CatTagCase.New()
-	catTags, err := usecase.Invoke(c)
+	catTags, totalPage, err := usecase.Invoke(c)
 	if err != nil {
 		c.JSONP(http.StatusInternalServerError, gin.H{
 			"message": "ng",
@@ -22,7 +22,8 @@ func (ctc CatTagController) TagList(c *gin.Context) {
 	}
 
 	c.JSONP(http.StatusOK, gin.H{
-		"message": "ok",
-		"list":    catTags,
+		"message":    "ok",
+		"list":       catTags,
+		"total_page": totalPage,
 	})
 }
